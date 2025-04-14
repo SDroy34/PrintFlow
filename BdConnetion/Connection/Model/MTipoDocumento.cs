@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BdConnetion.Connection.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BdConnetion.Connection.Model
 {
-    internal class MTipoDocumento
+    internal class MTipoDocumento : ITipoDocumento
     {
         public int IdTipoDocumento { get; set; }
         public string? Extencion { get; set; }
