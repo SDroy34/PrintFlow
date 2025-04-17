@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FInicio));
             button1 = new Button();
+            BtnInicioPrintFlow = new Button();
             SuspendLayout();
             // 
             // button1
@@ -41,12 +43,24 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // BtnInicioPrintFlow
+            // 
+            BtnInicioPrintFlow.Location = new Point(65, 190);
+            BtnInicioPrintFlow.Name = "BtnInicioPrintFlow";
+            BtnInicioPrintFlow.Size = new Size(75, 23);
+            BtnInicioPrintFlow.TabIndex = 1;
+            BtnInicioPrintFlow.Text = "Iniciar print flow";
+            BtnInicioPrintFlow.UseVisualStyleBackColor = true;
+            BtnInicioPrintFlow.Click += BtnInicioPrintFlow_Click;
+            // 
             // FInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(BtnInicioPrintFlow);
             Controls.Add(button1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FInicio";
             Text = "Print flow";
             ResumeLayout(false);
@@ -55,5 +69,6 @@
         #endregion
 
         private Button button1;
+        private Button BtnInicioPrintFlow;
     }
 }

@@ -16,7 +16,7 @@ namespace PrintFlow2
 {
     public partial class FCreatePrintFlow : Form
     {
-        private FuncionesBd _FnBd = new FuncionesBd(@"C:\Users\asgar\source\repos\PrintFlow\DataBase\PrintFlowDb.db");
+
         private string _path;
         private string _namePrintFlow;
         private string _selecPrint;
@@ -29,10 +29,11 @@ namespace PrintFlow2
 
             try
             {
+                var obtenerInf = Busisnes.Services.ObtenerInfBase.InfBase;
                 DTOsExtencion dTOs = new DTOsExtencion();
                 InitializeComponent();
                 ConfiguracionesDeBox.AllBoxConf(CbxImpresoras, SelectPrint.NombresImpresoras());
-                ConfiguracionesDeBox.AllBoxConf(CbxTipoDocumento, _FnBd.TiposDocumentos());
+                ConfiguracionesDeBox.AllBoxConf(CbxTipoDocumento, obtenerInf.Extenciones());
                 ConfiguracionesDeBox.AllBoxConf(TbxNamePrintFlow, 100);
                 ConfiguracionesDeBox.AllBoxConf(TbxAliasDoc, 50, "'ReciboDePago'");
                 NudCopias.Minimum = 1;
@@ -59,16 +60,17 @@ namespace PrintFlow2
 
         private async void BtnAddPrintFlow_Click(object sender, EventArgs e)
         {
-            int idTipDoc = 0, concAlias = 0, conPrintFlow = 0;
+            var obtenerInf = Busisnes.Services.ObtenerInfBase.InfBase;
+            int idTipDoc = 0; bool concAlias = false, conPrintFlow = false;
             try
             {
                 var task2 = new Task(() =>
                 {
-                    concAlias = _FnBd.ConcidenciasAlias(_aliasDocument.ToUpper());
+                    concAlias = obtenerInf.AliasConcidencias(_aliasDocument);
                 });
                 var task3 = new Task(() =>
                 {
-                    conPrintFlow = _FnBd.ConcidenciasPrintFlow(_namePrintFlow.ToUpper());
+                    conPrintFlow = obtenerInf.NamePFConcidencias(_namePrintFlow);
                 });
                 task2.Start();
                 await task2;
@@ -77,13 +79,13 @@ namespace PrintFlow2
                 if (String.IsNullOrWhiteSpace(_path)) { MessageBox.Show("Selecciona una carpeta para el Print Flow."); }
                 else if (NudCopias.Value == 0) { MessageBox.Show("El numero de impresiones no debede ser cero."); }
                 else if (String.IsNullOrEmpty(_namePrintFlow)) { MessageBox.Show("Ingrese el nombre del Pirnt Flow."); }
-                else if (concAlias >= 1) { MessageBox.Show("Hay un alias registrado con ese mismo nombre"); }
-                else if (conPrintFlow >= 1) { MessageBox.Show("Hay un Nombre de print flow registrado con el mismo nombre."); }
+                else if (!concAlias) { MessageBox.Show("Hay un alias registrado con ese mismo nombre"); }
+                else if (!conPrintFlow) { MessageBox.Show("Hay un Nombre de print flow registrado con el mismo nombre."); }
                 else
                 {
                     Task task1 = new Task(() =>
                     {
-                        idTipDoc = _FnBd.IdExtencion(_tipoDocument);
+                        idTipDoc = obtenerInf.TipoDoc(_tipoDocument);
 
                     });
 
@@ -98,17 +100,12 @@ namespace PrintFlow2
                         CantCopias = _cantCopias,
                         Path = _path
                     };
-                    _FnBd.AddPrintFlow(DtosCrate);
+                    obtenerInf.CreatePrintFlow(DtosCrate);
                 }
             }
             catch (SQLiteException ex)
             {
-                if (concAlias >= 1)
-                    MessageBox.Show("Hay un alias registrado con ese mismo nombre");
-                else if (conPrintFlow >= 1)
-                    MessageBox.Show("Hay un Nombre de print flow registrado con el mismo nombre.");
-                else
-                    MessageBox.Show($"{ex}");
+                MessageBox.Show($"{ex}");
             }
             catch (Exception ex)
             {

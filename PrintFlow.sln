@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "SharedLibr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintFlow2", "PrintFlow2\PrintFlow2.csproj", "{2AC49AF8-65DE-4904-B229-6323EA424B93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebasDeLogica", "PruebasDeLogica\PruebasDeLogica.csproj", "{61C0F795-A6AD-4C48-8B3E-E9C5C98102DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2AC49AF8-65DE-4904-B229-6323EA424B93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AC49AF8-65DE-4904-B229-6323EA424B93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AC49AF8-65DE-4904-B229-6323EA424B93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61C0F795-A6AD-4C48-8B3E-E9C5C98102DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61C0F795-A6AD-4C48-8B3E-E9C5C98102DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61C0F795-A6AD-4C48-8B3E-E9C5C98102DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61C0F795-A6AD-4C48-8B3E-E9C5C98102DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
